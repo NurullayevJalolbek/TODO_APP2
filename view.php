@@ -1,31 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-
-    <title>TODO-LIST</TODO-LIST></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/c4497f215d.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>TODO App</title>
 </head>
 
 <body>
-    <form action="index.php" method="post">
-        <input type="text" name="text">
-        <button type="submit"> Yuboriish</button>
-    </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h1 class="my-5">The Best TODO App ever</h1>
+                
+                <?php require "button.php"; ?>
 
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Text</th>
+                            <th>Action</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php require "forech.php"  ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
-<ul>
-    <?php
-    $malumotlar = $todo->GETTODO();
-    foreach ($malumotlar as $item) :
-        $IDDD = $item['id'];
-        echo "<li><input type=\"checkbox\" value=\"{$item['id']}\"> {$item['text']} <a href=\"index.php?id={$item['id']}\">O'chirish</a>"; ?>
-        <form action="index.php" method="post">
-            <input type="text" name="update">
-            <input type="hidden" name="ID" value="<?= $item['id'] ?>">
-            <button type="submit">Update</button>
-        </form>
-    <?php endforeach;
-    ?>
-</ul>

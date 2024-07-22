@@ -1,11 +1,14 @@
 <?php
-require "DB.php";
-require "Todo.php";
+$update = json_decode(file_get_contents('php://input'));
+if (isset($update->message)) {
+    require "bot/bot.php";
+    return;
+}
+require "src/Todo.php";
+require "src/DB.php";
 $pdo = DB::connect();
 
 $todo = new TODO($pdo);
-
-
 
 if (!empty($_POST) || !empty($_GET)) {
     if (isset($_POST['text'])) {
@@ -14,18 +17,13 @@ if (!empty($_POST) || !empty($_GET)) {
     }
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        echo $_GET['delet'];
         $todo->DELETTODO($id);
     }
     if (isset($_GET['complete'])) {
-        $task->complete($_GET['complete']);
+        $todo->complete($_GET['complete']);
     }
     if (isset($_GET['uncompleted'])) {
-        $task->uncompleted($_GET['uncompleted']);
+        $todo->uncompleted($_GET['uncompleted']);
     }
 }
-
-
-
-
-require "view.php";
+require "view/view.php";

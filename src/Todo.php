@@ -3,9 +3,9 @@
 class TODO
 {
     private $pdo;
-    public function __construct($pdo)
+    public function __construct()
     {
-        $this->pdo = $pdo;
+        $this->pdo = DB::connect();
     }
     public function SETTODO(string $todoname)
     {
@@ -16,11 +16,11 @@ class TODO
         $todoname = trim($todoname);
         $stmt->bindParam("text", $todoname);
         $stmt->bindParam("status", $status, PDO::PARAM_BOOL);
-        $stmt->execute();
+        return $stmt->execute();
     }
     public function GETTODO()
     {
-        return $this->pdo->query("SELECT * FROM todo_app")->fetchAll(PDO::FETCH_ASSOC);
+        return $this->pdo->query("SELECT * FROM todo_app")->fetchAll();
     }
 
     public function complete(int $id): bool

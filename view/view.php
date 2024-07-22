@@ -13,21 +13,16 @@
         <div class="row justify-content-center">
             <div class="col-8">
                 <h1 class="my-5">The Best TODO App ever</h1>
-                
-                <?php require "button.php"; ?>
+
+                <?php require "view/button.php"; ?>
 
                 <table class="table table-hover">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Status</th>
-                            <th>Text</th>
-                            <th>Action</th>
-                            
-                        </tr>
+                        
+                        <?php require "view/forech.php"  ?>
+
                     </thead>
                     <tbody>
-                        <?php require "forech.php"  ?>
                     </tbody>
                 </table>
             </div>

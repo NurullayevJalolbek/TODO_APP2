@@ -1,29 +1,35 @@
 <?php
+
+require_once "vendor/autoload.php";
+require "src/Task.php";
+
+date_default_timezone_set('Asia/Tashkent');
+
 $update = json_decode(file_get_contents('php://input'));
-if (isset($update->message)) {
-    require "bot/bot.php";
+
+if (isset($update)) {
+    require 'bot/bot.php';
     return;
 }
-require "src/Todo.php";
-require "src/DB.php";
-$pdo = DB::connect();
 
-$todo = new TODO($pdo);
+if (count($_GET) > 0 || count($_POST) > 0) {
+    $task = new Task();
 
-if (!empty($_POST) || !empty($_GET)) {
     if (isset($_POST['text'])) {
-        $todo->SETTODO($_POST['text']);
-        header('Location:  index.php');
+        $task->add($_POST['text']);
     }
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $todo->DELETTODO($id);
-    }
+
     if (isset($_GET['complete'])) {
-        $todo->complete($_GET['complete']);
+        $task->complete($_GET['complete']);
     }
+
     if (isset($_GET['uncompleted'])) {
-        $todo->uncompleted($_GET['uncompleted']);
+        $task->uncompleted($_GET['uncompleted']);
+    }
+
+    if (isset($_GET['delete'])) {
+        $task->delete($_GET['delete']);
     }
 }
-require "view/view.php";
+
+require 'view/home.php';
